@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class GerenciadorDeUsuario {
+public class UsuarioService {
     String endereco = "C:\\Projects_java\\Desafio sistema de cadastros\\formulario.txt";
     List<Usuario> usuarios = new ArrayList<>();
 

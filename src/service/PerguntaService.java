@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class GerenciadorDePerguntas {
+public class PerguntaService {
     String endereco = "C:\\Projects_java\\Desafio sistema de cadastros\\formulario.txt";
 
 

@@ -1,12 +1,12 @@
-import service.GerenciadorDePerguntas;
-import service.GerenciadorDeUsuario;
+import service.PerguntaService;
+import service.UsuarioService;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        GerenciadorDeUsuario gerenciadorDeUsuario = new GerenciadorDeUsuario();
-        GerenciadorDePerguntas gerenciadorDePerguntas = new GerenciadorDePerguntas();
+        UsuarioService gerenciadorDeUsuario = new UsuarioService();
+        PerguntaService gerenciadorDePerguntas = new PerguntaService();
 
         Scanner sc = new Scanner(System.in);
 
