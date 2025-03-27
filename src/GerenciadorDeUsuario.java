@@ -1,4 +1,5 @@
 import exceptions.*;
+import model.Usuario;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -93,7 +94,7 @@ public class GerenciadorDeUsuario {
             if (usuario.getName().toLowerCase().contains(entrada) ||
                     String.valueOf(usuario.getIdade()).contains(entrada) ||
                     usuario.getEmail().toLowerCase().contains(entrada)) {
-                System.out.println("Usuario encontrado:\n" + usuario);
+                System.out.println("model.Usuario encontrado:\n" + usuario);
                 encontrado = true;
             }
         }
