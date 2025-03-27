@@ -1,3 +1,5 @@
+package service;
+
 import exceptions.*;
 import model.Usuario;
 

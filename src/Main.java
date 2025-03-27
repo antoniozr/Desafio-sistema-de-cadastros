@@ -1,3 +1,6 @@
+import service.GerenciadorDePerguntas;
+import service.GerenciadorDeUsuario;
+
 import java.util.Scanner;
 
 public class Main {
