@@ -14,7 +14,6 @@ public class UsuarioService {
     String endereco = "C:\\Projects_java\\Desafio sistema de cadastros\\formulario.txt";
     List<Usuario> usuarios = new ArrayList<>();
 
-
     public void cadastrarUsuario() {
 
         Scanner sc = new Scanner(System.in);
@@ -27,17 +26,17 @@ public class UsuarioService {
 
             String email = sc.nextLine();
             if (!email.contains("@")) {
-                throw new IvalidEmailException("O email deve conter @");
+                throw new InvalidEmailException("O email deve conter @");
             }
 
-            for (Usuario usuario: usuarios){
-                if (usuario.getEmail().equals(email)){
+            for (Usuario usuario : usuarios) {
+                if (usuario.getEmail().equals(email)) {
                     throw new EmailDuplicadoException("Este email já está cadastrado!");
                 }
             }
 
             int idade = sc.nextInt();
-            if (idade<18) {
+            if (idade < 18) {
                 throw new InvalidIdadeExcpetion("Idade minima 18 anos.");
             }
 
@@ -48,11 +47,9 @@ public class UsuarioService {
                 throw new InvalidAlturaException("Altura inválida, use vírgula (ex: 1,80).");
             }
 
-
             Usuario usuario = new Usuario(name, email, idade, altura);
 
             usuarios.add(usuario);
-
 
             String enderecoArquivo = "C:\\Projects_java\\Desafio sistema de cadastros\\" + usuarios.size() +
                     " - " + usuario.getName().toUpperCase() + ".txt";
@@ -69,30 +66,29 @@ public class UsuarioService {
             } catch (IOException e) {
                 System.out.println("Erro ao salvar o arquivo" + e.getMessage());
             }
-        }catch (InvalidNomeException | IvalidEmailException | EmailDuplicadoException |
-                InvalidIdadeExcpetion | InvalidAlturaException  e){
+        } catch (InvalidNomeException | InvalidEmailException | EmailDuplicadoException |
+                 InvalidIdadeExcpetion | InvalidAlturaException e) {
             System.out.println(e.getMessage());
         }
     }
 
-
     public void listarUsuarios() {
         if (usuarios.isEmpty()) {
             System.out.println("Nenhum usuario encontrado!");
-        }else {
-            for (Usuario usuario : usuarios){
+        } else {
+            for (Usuario usuario : usuarios) {
                 System.out.println(usuario.getName());
             }
         }
     }
 
-    public void buscarUsuario(){
-        Scanner sc =new Scanner(System.in);
+    public void buscarUsuario() {
+        Scanner sc = new Scanner(System.in);
         System.out.println("Digite o nome, idade ou email :");
         String entrada = sc.nextLine();
 
         boolean encontrado = false;
-        for (Usuario usuario : usuarios){
+        for (Usuario usuario : usuarios) {
             if (usuario.getName().toLowerCase().contains(entrada) ||
                     String.valueOf(usuario.getIdade()).contains(entrada) ||
                     usuario.getEmail().toLowerCase().contains(entrada)) {
@@ -103,7 +99,5 @@ public class UsuarioService {
         if (!encontrado) {
             System.out.println("Usuário não encontrado.");
         }
-
     }
-
 }
