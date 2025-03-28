@@ -48,6 +48,8 @@ public class UsuarioService {
             }
 
             Usuario usuario = new Usuario(name, email, idade, altura);
+            System.out.println("Cadastrado com sucesso!");
+            System.out.println(usuario.toString());
 
             usuarios.add(usuario);
 
