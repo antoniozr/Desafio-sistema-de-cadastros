@@ -7,6 +7,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -68,6 +69,8 @@ public class UsuarioService {
             } catch (IOException e) {
                 System.out.println("Erro ao salvar o arquivo" + e.getMessage());
             }
+        }catch (InputMismatchException e){
+            System.out.println("A idade precisa ser um número inteiro");
         } catch (InvalidNomeException | InvalidEmailException | EmailDuplicadoException |
                  InvalidIdadeExcpetion | InvalidAlturaException e) {
             System.out.println(e.getMessage());
