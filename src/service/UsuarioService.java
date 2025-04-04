@@ -14,17 +14,20 @@ import java.util.Scanner;
 public class UsuarioService {
     String endereco = "C:\\Projects_java\\Desafio sistema de cadastros\\formulario.txt";
     List<Usuario> usuarios = new ArrayList<>();
+    PerguntaService perguntaService = new PerguntaService();
 
     public void cadastrarUsuario() {
 
         Scanner sc = new Scanner(System.in);
 
         try {
+            perguntaService.lerPerguntaEspecifica(1);
             String name = sc.nextLine();
             if (name.length() < 10) {
                 throw new InvalidNomeException("O nome deve possuir no minimo 10 caracteres!");
             }
 
+            perguntaService.lerPerguntaEspecifica(2);
             String email = sc.nextLine();
             if (!email.contains("@")) {
                 throw new InvalidEmailException("O email deve conter @");
@@ -36,6 +39,7 @@ public class UsuarioService {
                 }
             }
 
+            perguntaService.lerPerguntaEspecifica(3);
             int idade = sc.nextInt();
             if (idade < 18) {
                 throw new InvalidIdadeExcpetion("Idade minima 18 anos.");
@@ -43,6 +47,7 @@ public class UsuarioService {
 
             sc.nextLine();
 
+            perguntaService.lerPerguntaEspecifica(4);
             String altura = sc.nextLine();
             if (!altura.contains(",")) {
                 throw new InvalidAlturaException("Altura inválida, use vírgula (ex: 1,80).");

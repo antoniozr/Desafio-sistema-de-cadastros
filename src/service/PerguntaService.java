@@ -6,10 +6,21 @@ import java.util.List;
 import java.util.Scanner;
 
 public class PerguntaService {
-    String endereco = "C:\\Projects_java\\Desafio sistema de cadastros\\formulario.txt";
+    String endereco = "C:\\Projects_java\\Desafio sistema de cadastros\\src\\data\\formulario.txt";
+
+    public void criarFile() {
+        File file = new File(endereco);
+        try(FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw)){
+            bw.write("1 - Qual seu nome completo? \n2 - Qual seu email de contato? \n3 - Qual sua idade? \n4 - Qual sua altura?");
+            bw.flush();
+        } catch (IOException e){
+            System.out.println("Erro" + e.getMessage());
+        }
+    }
 
 
-    public  void lerFormulario(){
+    public void lerFormulario(){
 
         try (BufferedReader reader = new BufferedReader(new FileReader(endereco))){
             String linha;
@@ -18,6 +29,22 @@ public class PerguntaService {
             }
         } catch (IOException e) {
             System.out.println("Não foi possivel ler o arquivo: " + e.getMessage());
+        }
+    }
+
+    public void lerPerguntaEspecifica(int numeroLInha) {
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(endereco))){
+            String linha;
+            int cont = 1;
+            while ((linha = reader.readLine()) != null) {
+                if (cont == numeroLInha) {
+                    System.out.println(linha);
+                }
+                cont ++;
+            }
+        } catch (IOException e){
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 

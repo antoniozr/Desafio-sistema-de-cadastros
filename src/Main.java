@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
         UsuarioService gerenciadorDeUsuario = new UsuarioService();
         PerguntaService gerenciadorDePerguntas = new PerguntaService();
+        gerenciadorDePerguntas.criarFile();
 
         Scanner sc = new Scanner(System.in);
 
@@ -21,11 +22,11 @@ public class Main {
             System.out.println("4 - Deletar pergunta do formulário");
             System.out.println("5 - Pesquisar usuário por nome ou idade ou email");
             opcao = sc.nextInt();
+            sc.nextLine();
 
             switch (opcao) {
                 case 1:
                     System.out.println("### Cadastrar Usuário ###");
-                    gerenciadorDePerguntas.lerFormulario();
                     gerenciadorDeUsuario.cadastrarUsuario();
                     break;
 
