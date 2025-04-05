@@ -1,85 +1,59 @@
 package service;
 
-import exceptions.*;
+
 import model.Usuario;
+import utils.InputValidator;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class UsuarioService {
-    String endereco = "C:\\Projects_java\\Desafio sistema de cadastros\\formulario.txt";
+    String endereco = "C:\\Projects_java\\Desafio sistema de cadastros\\src\\data\\formulario.txt";
     List<Usuario> usuarios = new ArrayList<>();
     PerguntaService perguntaService = new PerguntaService();
+    InputValidator inputValidator = new InputValidator();
+    Scanner sc = new Scanner(System.in);
 
     public void cadastrarUsuario() {
 
-        Scanner sc = new Scanner(System.in);
+        perguntaService.lerPerguntaEspecifica(1);
+        String name = inputValidator.validarNome(sc);
 
-        try {
-            perguntaService.lerPerguntaEspecifica(1);
-            String name = sc.nextLine();
-            if (name.length() < 10) {
-                throw new InvalidNomeException("O nome deve possuir no minimo 10 caracteres!");
-            }
+        perguntaService.lerPerguntaEspecifica(2);
+        String email = inputValidator.validarEmail(sc, usuarios);
 
-            perguntaService.lerPerguntaEspecifica(2);
-            String email = sc.nextLine();
-            if (!email.contains("@")) {
-                throw new InvalidEmailException("O email deve conter @");
-            }
+        perguntaService.lerPerguntaEspecifica(3);
+        int idade = inputValidator.validaIdade(sc);
 
-            for (Usuario usuario : usuarios) {
-                if (usuario.getEmail().equals(email)) {
-                    throw new EmailDuplicadoException("Este email já está cadastrado!");
-                }
-            }
+        perguntaService.lerPerguntaEspecifica(4);
+        String altura = inputValidator.validaAltura(sc);
 
-            perguntaService.lerPerguntaEspecifica(3);
-            int idade = sc.nextInt();
-            if (idade < 18) {
-                throw new InvalidIdadeExcpetion("Idade minima 18 anos.");
-            }
+        Usuario usuario = new Usuario(name, email, idade, altura);
+        System.out.println("Cadastrado com sucesso!");
+        System.out.println(usuario.toString());
 
-            sc.nextLine();
+        usuarios.add(usuario);
 
-            perguntaService.lerPerguntaEspecifica(4);
-            String altura = sc.nextLine();
-            if (!altura.contains(",")) {
-                throw new InvalidAlturaException("Altura inválida, use vírgula (ex: 1,80).");
-            }
+        String enderecoArquivo = "C:\\Projects_java\\Desafio sistema de cadastros\\" + usuarios.size() +
+                " - " + usuario.getName().toUpperCase() + ".txt";
 
-            Usuario usuario = new Usuario(name, email, idade, altura);
-            System.out.println("Cadastrado com sucesso!");
-            System.out.println(usuario.toString());
-
-            usuarios.add(usuario);
-
-            String enderecoArquivo = "C:\\Projects_java\\Desafio sistema de cadastros\\" + usuarios.size() +
-                    " - " + usuario.getName().toUpperCase() + ".txt";
-
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(enderecoArquivo))) {
-                writer.write(usuario.getName());
-                writer.newLine();
-                writer.write(usuario.getEmail());
-                writer.newLine();
-                writer.write(String.valueOf(usuario.getIdade()));
-                writer.newLine();
-                writer.write(String.valueOf(usuario.getAltura()));
-                writer.newLine();
-            } catch (IOException e) {
-                System.out.println("Erro ao salvar o arquivo" + e.getMessage());
-            }
-        }catch (InputMismatchException e){
-            System.out.println("A idade precisa ser um número inteiro");
-        } catch (InvalidNomeException | InvalidEmailException | EmailDuplicadoException |
-                 InvalidIdadeExcpetion | InvalidAlturaException e) {
-            System.out.println(e.getMessage());
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(enderecoArquivo))) {
+            writer.write(usuario.getName());
+            writer.newLine();
+            writer.write(usuario.getEmail());
+            writer.newLine();
+            writer.write(String.valueOf(usuario.getIdade()));
+            writer.newLine();
+            writer.write(String.valueOf(usuario.getAltura()));
+            writer.newLine();
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar o arquivo" + e.getMessage());
         }
+
     }
 
     public void listarUsuarios() {
