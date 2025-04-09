@@ -2,6 +2,7 @@ package service;
 
 
 import model.Usuario;
+import repository.PerguntaFileRepository;
 import utils.InputValidator;
 
 import java.io.BufferedWriter;
@@ -14,22 +15,22 @@ import java.util.Scanner;
 public class UsuarioService {
     String endereco = "C:\\Projects_java\\Desafio sistema de cadastros\\src\\data\\formulario.txt";
     List<Usuario> usuarios = new ArrayList<>();
-    PerguntaService perguntaService = new PerguntaService();
+    PerguntaFileRepository perguntaFileRepository = new PerguntaFileRepository();
     InputValidator inputValidator = new InputValidator();
     Scanner sc = new Scanner(System.in);
 
     public void cadastrarUsuario() {
 
-        perguntaService.lerPerguntaEspecifica(1);
+        perguntaFileRepository.lerPerguntaEspecifica(1);
         String name = inputValidator.validarNome(sc);
 
-        perguntaService.lerPerguntaEspecifica(2);
+        perguntaFileRepository.lerPerguntaEspecifica(2);
         String email = inputValidator.validarEmail(sc, usuarios);
 
-        perguntaService.lerPerguntaEspecifica(3);
+        perguntaFileRepository.lerPerguntaEspecifica(3);
         int idade = inputValidator.validaIdade(sc);
 
-        perguntaService.lerPerguntaEspecifica(4);
+        perguntaFileRepository.lerPerguntaEspecifica(4);
         String altura = inputValidator.validaAltura(sc);
 
         Usuario usuario = new Usuario(name, email, idade, altura);

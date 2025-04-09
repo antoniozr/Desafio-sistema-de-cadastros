@@ -1,4 +1,4 @@
-import service.PerguntaService;
+import repository.PerguntaFileRepository;
 import service.UsuarioService;
 
 import java.util.Scanner;
@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         UsuarioService gerenciadorDeUsuario = new UsuarioService();
-        PerguntaService gerenciadorDePerguntas = new PerguntaService();
+        PerguntaFileRepository gerenciadorDePerguntas = new PerguntaFileRepository();
         gerenciadorDePerguntas.criarFile();
 
         Scanner sc = new Scanner(System.in);

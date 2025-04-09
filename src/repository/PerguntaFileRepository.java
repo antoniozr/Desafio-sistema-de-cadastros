@@ -1,11 +1,11 @@
-package service;
+package repository;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class PerguntaService {
+public class PerguntaFileRepository {
     String endereco = "C:\\Projects_java\\Desafio sistema de cadastros\\src\\data\\formulario.txt";
 
     public void criarFile() {
@@ -15,7 +15,7 @@ public class PerguntaService {
             bw.write("1 - Qual seu nome completo? \n2 - Qual seu email de contato? \n3 - Qual sua idade? \n4 - Qual sua altura?");
             bw.flush();
         } catch (IOException e){
-            System.out.println("Erro" + e.getMessage());
+            System.out.println("Erro ao criar arquivo: " + e.getMessage());
         }
     }
 
