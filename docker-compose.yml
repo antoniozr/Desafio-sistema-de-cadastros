@@ -1,0 +1,12 @@
+version: '3.8'
+name: sistemacadastro
+services:
+  postgres:
+    image: postgres:15
+    container_name: sistemacadastro
+    environment:
+      POSTGRES_DB: sistemacadastro
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: manager
+    ports:
+        - "5432:5432"
