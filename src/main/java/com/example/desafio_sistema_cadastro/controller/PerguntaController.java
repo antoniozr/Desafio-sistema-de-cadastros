@@ -2,9 +2,8 @@ package com.example.desafio_sistema_cadastro.controller;
 
 import com.example.desafio_sistema_cadastro.model.Pergunta;
 import com.example.desafio_sistema_cadastro.service.PerguntaService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +20,16 @@ public class PerguntaController {
     @GetMapping
     public List<Pergunta> listarPerguntas() {
         return perguntaService.listarPerguntas();
+    }
+
+    @PostMapping
+    public Pergunta cadastrarPergunta(@RequestBody Pergunta pergunta) {
+        return perguntaService.registrarPergunta(pergunta);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarPergunta(@PathVariable Long id) {
+        perguntaService.deletarPergunta(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -32,4 +32,16 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
+    public List<Usuario> buscar(String termo) {
+        if (termo.matches("\\d+")) {
+            return usuarioRepository.findByIdade(Integer.parseInt(termo));
+        }
+
+        if (termo.contains("@")) {
+            return usuarioRepository.findByEmailContainingIgnoreCase(termo);
+        }
+
+        return usuarioRepository.findByNameContainingIgnoreCase(termo);
+    }
+
 }
