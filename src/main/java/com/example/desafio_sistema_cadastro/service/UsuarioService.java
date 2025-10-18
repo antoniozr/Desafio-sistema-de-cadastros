@@ -1,6 +1,7 @@
 package com.example.desafio_sistema_cadastro.service;
 
 import com.example.desafio_sistema_cadastro.dto.UsuarioDto;
+import com.example.desafio_sistema_cadastro.exceptions.EmailDuplicadoException;
 import com.example.desafio_sistema_cadastro.model.Usuario;
 import com.example.desafio_sistema_cadastro.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,10 @@ public class UsuarioService {
     }
 
     public Usuario registrarUsuario(Usuario usuario) {
+
+        if (usuarioRepository.existsByEmail(usuario.getEmail())) {
+            throw new EmailDuplicadoException("Email invalido");
+        }
         return usuarioRepository.save(usuario);
     }
 
